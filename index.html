@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fantasy Case Opening</title>
   <style>
     body {
@@ -10,14 +8,9 @@
       background: linear-gradient(to right, #1e1e2f, #2c2c44);
       color: white;
       text-align: center;
-      padding: 30px;
-      user-select: none;
+      padding: 50px;
     }
     h1 {
-      margin-bottom: 10px;
-    }
-    #balance {
-      font-size: 18px;
       margin-bottom: 20px;
     }
     .case-container {
@@ -34,7 +27,6 @@
     .items {
       display: flex;
       transition: transform 1.5s ease-out;
-      will-change: transform;
     }
     .item {
       flex: 0 0 100px;
@@ -45,9 +37,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 14px;
       border: 2px solid #555;
-      user-select: none;
     }
     .pointer {
       width: 6px;
@@ -60,60 +51,38 @@
       z-index: 2;
     }
     button {
-      padding: 12px 25px;
+      padding: 10px 20px;
       background: #4CAF50;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 18px;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-    button:disabled {
-      background: #777;
-      cursor: not-allowed;
     }
     .result {
       margin-top: 20px;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
-      min-height: 28px;
-      user-select: none;
     }
   </style>
 </head>
 <body>
-
-  <h1>Кейс за 25 звёзд</h1>
-  <div id="balance">Баланс: загрузка...</div>
-
+  <h1>кейс за 25 звёзд</h1>
   <div class="case-container">
     <div class="pointer"></div>
-    <div class="items" id="items"></div>
+    <div class="items" id="items" style="transition: transform 0.49s ease-out; transform: translateX(-3223px);"><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Роза</div><div class="item">Мишка</div><div class="item">Мишка</div><div class="item">Ракета</div><div class="item">Ракета</div><div class="item">Роза</div><div class="item">Роза</div></div>
   </div>
+  <button onclick="openCase()">Открыть кейс</button>
+  <div class="result" id="result">🎉 Выпало: Ракета!</div>
 
-  <button id="openCaseBtn" disabled>Открыть кейс</button>
-
-  <div class="result" id="result"></div>
-
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const items = [
       'Мишка', 'Мишка', 'Роза', 'Мишка', 'Мишка',
       'Ракета', 'Ракета', 'Роза', 'Роза'
     ];
 
-    const COST = 25; // стоимость кейса
-    const API_URL = "http://127.0.0.1:5000"; // <- поставь адрес своего сервера!
-
     const itemsContainer = document.getElementById('items');
     const resultDiv = document.getElementById('result');
-    const balanceDiv = document.getElementById('balance');
-    const openCaseBtn = document.getElementById('openCaseBtn');
-
-    let balance = 0;
-    let userId = null;
 
     function generateItems(repeat = 10) {
       itemsContainer.innerHTML = '';
@@ -127,85 +96,31 @@
       }
     }
 
-    function updateBalanceUI() {
-      balanceDiv.textContent = `Баланс: ${balance} ⭐`;
-      openCaseBtn.disabled = balance < COST;
-    }
-
-    async function fetchBalance() {
-      try {
-        const res = await fetch(`${API_URL}/balance/${userId}`);
-        const data = await res.json();
-        balance = data.balance ?? 0;
-        updateBalanceUI();
-      } catch (e) {
-        balanceDiv.textContent = "Ошибка загрузки баланса";
-        openCaseBtn.disabled = true;
-      }
-    }
-
-    async function spendStars(amount) {
-      try {
-        const res = await fetch(`${API_URL}/spend`, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ user_id: userId, amount })
-        });
-        const data = await res.json();
-        if (!data.success) throw new Error(data.error || "Ошибка списания");
-        balance = data.balance;
-        updateBalanceUI();
-        return true;
-      } catch (e) {
-        alert("Ошибка: " + e.message);
-        return false;
-      }
-    }
-
     function openCase() {
-      if (balance < COST) {
-        alert("Недостаточно звёзд для открытия кейса!");
-        return;
-      }
+      generateItems(10);
 
-      spendStars(COST).then(success => {
-        if (!success) return;
+      const allItems = document.querySelectorAll('.item');
+      const total = allItems.length;
+      const targetIndex = Math.floor(Math.random() * (total - 10)) + 5;
 
-        generateItems(10);
-        const allItems = document.querySelectorAll('.item');
-        const total = allItems.length;
-        const targetIndex = Math.floor(Math.random() * (total - 10)) + 5;
+      const itemWidth = allItems[0].offsetWidth + 40; // +margin
+      const offset = itemWidth * targetIndex - (document.querySelector('.case-container').offsetWidth / 2) + (itemWidth / 2);
 
-        const itemWidth = allItems[0].offsetWidth + 40; // +margin
-        const offset = itemWidth * targetIndex - (document.querySelector('.case-container').offsetWidth / 2) + (itemWidth / 2);
+      // Ускоренная анимация с рандомной длительностью
+      const duration = (Math.random() * 1 + 0.01).toFixed(2); // от 1.2 до 2.2 сек
+      itemsContainer.style.transition = `transform ${duration}s ease-out`;
+      itemsContainer.style.transform = `translateX(-${offset}px)`;
 
-        const duration = (Math.random() * 1 + 1.2).toFixed(2);
-        itemsContainer.style.transition = `transform ${duration}s ease-out`;
-        itemsContainer.style.transform = `translateX(-${offset}px)`;
-
-        openCaseBtn.disabled = true;
-        resultDiv.textContent = "🎲 Открытие кейса...";
-
-        setTimeout(() => {
-          const resultItem = allItems[targetIndex].textContent;
-          resultDiv.textContent = `🎉 Выпало: ${resultItem}!`;
-          openCaseBtn.disabled = balance < COST;
-        }, duration * 1000 + 150);
-      });
+      // Показываем результат после окончания анимации
+      setTimeout(() => {
+        const resultItem = allItems[targetIndex].textContent;
+        resultDiv.textContent = `🎉 Выпало: ${resultItem}!`;
+      }, duration * 1000 + 100);
     }
 
-    // Инициализация
-    window.Telegram.WebApp.ready();
-
-    userId = Telegram.WebApp.initDataUnsafe?.user?.id;
-    if (!userId) {
-      balanceDiv.textContent = "Ошибка: не удалось получить ID пользователя";
-      openCaseBtn.disabled = true;
-    } else {
-      fetchBalance();
-    }
-
-    openCaseBtn.addEventListener('click', openCase);
+    generateItems();
   </script>
-</body>
-</html>
+
+
+
+</body></html>
