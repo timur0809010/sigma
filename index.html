@@ -1,11 +1,128 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Подождите...</title>
-    <meta http-equiv="refresh" content="0;url=https://www.youtube.com/watch?v=xvFZjo5PgG0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fantasy Case Opening</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1e1e2f, #2c2c44);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .case-container {
+      overflow: hidden;
+      border: 5px solid #fff;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      background: #111;
+      position: relative;
+      height: 140px;
+    }
+    .items {
+      display: flex;
+      transition: transform 1.5s ease-out;
+    }
+    .item {
+      flex: 0 0 100px;
+      height: 100px;
+      margin: 20px;
+      background: #222;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 2px solid #555;
+    }
+    .pointer {
+      width: 6px;
+      height: 100%;
+      background: red;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <p>wqeqepodsl;dkl;dskfald  ---, <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">click here</a>.</p>
+  <h1>кейс за 25 звёзд</h1>
+  <div class="case-container">
+    <div class="pointer"></div>
+    <div class="items" id="items"></div>
+  </div>
+  <button onclick="openCase()">Открыть кейс</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const items = [
+      'Мишка', 'Мишка', 'Роза', 'Мишка', 'Мишка',
+      'Ракета', 'Ракета', 'Роза', 'Роза'
+    ];
+
+    const itemsContainer = document.getElementById('items');
+    const resultDiv = document.getElementById('result');
+
+    function generateItems(repeat = 10) {
+      itemsContainer.innerHTML = '';
+      for (let i = 0; i < repeat; i++) {
+        items.forEach(item => {
+          const el = document.createElement('div');
+          el.className = 'item';
+          el.textContent = item;
+          itemsContainer.appendChild(el);
+        });
+      }
+    }
+
+    function openCase() {
+      generateItems(10);
+
+      const allItems = document.querySelectorAll('.item');
+      const total = allItems.length;
+      const targetIndex = Math.floor(Math.random() * (total - 10)) + 5;
+
+      const itemWidth = allItems[0].offsetWidth + 40; // +margin
+      const offset = itemWidth * targetIndex - (document.querySelector('.case-container').offsetWidth / 2) + (itemWidth / 2);
+
+      // Ускоренная анимация с рандомной длительностью
+      const duration = (Math.random() * 1 + 0.01).toFixed(2); // от 1.2 до 2.2 сек
+      itemsContainer.style.transition = `transform ${duration}s ease-out`;
+      itemsContainer.style.transform = `translateX(-${offset}px)`;
+
+      // Показываем результат после окончания анимации
+      setTimeout(() => {
+        const resultItem = allItems[targetIndex].textContent;
+        resultDiv.textContent = `🎉 Выпало: ${resultItem}!`;
+      }, duration * 1000 + 100);
+    }
+
+    generateItems();
+  </script>
+
+
 </body>
 </html>
